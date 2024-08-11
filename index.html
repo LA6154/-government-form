@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GVT Design Form</title>
+    <style>
+    
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: beige;
+            border: 5px solid  black;
+             
+        }
+        h1{
+          text-align: center;
+          color: black;
+        }
+        form {
+            max-width: 600px;
+            margin: auto;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+        }
+        input[type="radio"], input[type="submit"] {
+            width: auto;
+        }
+        input[type="submit"] {
+            margin-top: 20px;
+            padding: 10px 20px;
+            margin-bottom: 10px;
+        }
+        
+    </style>
+</head>
+<body>
+
+    <h1>Fill User Details</h1>
+   
+    <form id="userForm">
+        <label for="fname">First Name:</label>
+        <input type="text" name="fname" id="fname" placeholder="First Name" required><br><br>
+
+        <label for="lname">Last Name:</label>
+        <input type="text" name="lname" id="lname" placeholder="Last Name" required><br><br>
+
+        <label for="Fname">Father's Name:</label>
+        <input type="text" name="Fname" id="Fname" placeholder="Father's Name" required><br><br>
+
+        <label for="Mname">Mother's Name:</label>
+        <input type="text" name="Mname" id="Mname" placeholder="Mother's Name" required><br><br>
+
+        <label for="email">Email:</label>
+        <input type="email" name="email" id="email" placeholder="example@gmail.com" required><br><br>
+
+        <label for="pwd">Password:</label>
+        <input type="password" name="pwd" id="pwd" placeholder="Password" required><br><br>
+
+        <label for="edu">Education:</label>
+        <select name="edu" id="edu" required>
+            <option value="bi-tech">Bi-tech</option>
+            <option value="m-tech">M-tech</option>
+            <option value="phd">PHD</option>
+            <option value="b-ed">B-ED</option>
+        </select><br><br>
+
+        <label for="birth">DOB:</label>
+        <input type="date" name="birth" id="birth" required><br><br>
+
+        <label for="gender">Gender:</label>
+        <label><input type="radio" name="gender" value="Male" required> Male</label>
+        <label><input type="radio" name="gender" value="Female" required> Female</label><br>
+
+        <label for="address">Address:</label>
+        <textarea name="address" id="address" placeholder="Your address here" required></textarea><br><br>
+
+        <label for="number">Phone No:</label>
+        <input type="tel" name="number" id="number" placeholder="9573456778" required><br><br>
+
+        <label for="photo">Photo:</label>
+        <input type="file" name="photo" id="photo" required accept="image/*"><br>
+        <input type="submit" value="Submit">
+    </form>
+   
+
+    <script>
+        document.getElementById('userForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            const fname = document.getElementById('fname').value;
+            const lname = document.getElementById('lname').value;
+            const Fname = document.getElementById('Fname').value;
+            const Mname = document.getElementById('Mname').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('pwd').value;
+            const edu = document.getElementById('edu').value;
+            const birth = document.getElementById('birth').value;
+            const gender = document.querySelector('input[name="gender"]:checked').value;
+            const address = document.getElementById('address').value;
+            const number = document.getElementById('number').value;
+            const photo = document.getElementById('photo').files[0];
+            
+            const reader = new FileReader();
+            
+            reader.onloadend = function() {
+                const photoData = reader.result;
+
+                const userDetails = {
+                    fname: fname,
+                    lname: lname,
+                    Fname: Fname,
+                    Mname: Mname,
+                    email: email,
+                    password: password,
+                    edu: edu,
+                    birth: birth,
+                    gender: gender,
+                    address: address,
+                    number: number,
+                    photo: photoData
+                };
+                
+                localStorage.setItem('userDetails', JSON.stringify(userDetails));
+                window.location.href = './lalan.html';
+            };
+
+            if (photo) {
+                reader.readAsDataURL(photo);
+            }
+        });
+    </script>
+</body>
+</html>

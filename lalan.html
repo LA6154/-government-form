@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: beige;
+            border: 5px solid black;
+            border-radius: 5px;
+        }
+        #userDetails {
+            max-width: 600px;
+            margin: auto;
+        }
+        img {
+            max-width: 200px;
+            height: auto;
+        }
+        h1{
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>User Details</h1>
+    <div id="userDetails"></div>
+
+    <script>
+        const userDetails = JSON.parse(localStorage.getItem('userDetails'));
+
+        if (userDetails) {
+            document.getElementById('userDetails').innerHTML = `
+                <p><strong>First Name:</strong> ${userDetails.fname}</p>
+                <p><strong>Last Name:</strong> ${userDetails.lname}</p>
+                <p><strong>Father's Name:</strong> ${userDetails.Fname}</p>
+                <p><strong>Mother's Name:</strong> ${userDetails.Mname}</p>
+                <p><strong>Qualification:</strong> ${userDetails.edu}</p>
+                <p><strong>Email:</strong> ${userDetails.email}</p>
+                <p><strong>Password:</strong> ${userDetails.password}</p>
+                <p><strong>DOB:</strong> ${userDetails.birth}</p>
+                <p><strong>Gender:</strong> ${userDetails.gender}</p>
+                <p><strong>Address:</strong> ${userDetails.address}</p>
+                <p><strong>Phone No:</strong> ${userDetails.number}</p>
+                <img src="${userDetails.photo}" alt="User Photo">
+            `;
+        } else {
+            document.getElementById('userDetails').innerHTML = '<p>Yes user details found.</p>';
+        }
+    </script>
+</body>
+</html>
